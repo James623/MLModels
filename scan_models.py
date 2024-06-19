@@ -3,9 +3,14 @@ import tensorflow as tf
 from art.estimators.classification import TensorFlowV2Classifier
 from art.attacks.evasion import FastGradientMethod
 from art.utils import load_mnist
+import os
+
+# Выведем текущую рабочую директорию
+print("Current working directory:", os.getcwd())
 
 # Загрузите модель
-model = tf.keras.models.load_model('mlmodels/model.h5')  # Путь к вашей модели
+model_path = 'mlmodels/model.h5'
+model = tf.keras.models.load_model(model_path)
 
 # Создайте классификатор ART
 classifier = TensorFlowV2Classifier(
