@@ -9,7 +9,7 @@ import os
 print("Current working directory:", os.getcwd())
 
 # Путь к модели
-model_path = 'mlmodels/model.h5'
+model_path = '/var/jenkins_home/workspace/MLSecOps/mlmodels/model.h5'
 
 # Попытаемся загрузить модель
 try:
