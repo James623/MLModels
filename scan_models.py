@@ -9,7 +9,7 @@ import os
 print("Current working directory:", os.getcwd())
 
 # Загрузите модель
-model_path = 'mlmodels/cifar10_model.h5'
+model_path = 'mlmodels/mnist_net2net.py'
 model = tf.keras.models.load_model(model_path)
 
 # Создайте классификатор ART
