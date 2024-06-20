@@ -9,19 +9,22 @@ import os
 print("Current working directory:", os.getcwd())
 
 # Загрузите модель
-model_path = 'mlmodels/mnist_net2net.py'
+model_path = '/resnet50_imagenet.h5'
 model = tf.keras.models.load_model(model_path)
 
 # Создайте классификатор ART
 classifier = TensorFlowV2Classifier(
     model=model,
-    nb_classes=10,
-    input_shape=(32, 32, 3),
+    nb_classes=1000,  # ImageNet имеет 1000 классов
+    input_shape=(224, 224, 3),
     loss_object=tf.keras.losses.CategoricalCrossentropy()
 )
 
-# Загрузите данные для тестирования
+# Загрузите данные для тестирования (измените на подходящий набор данных для вашего случая)
 (x_train, y_train), (x_test, y_test), min_, max_ = load_cifar10()
+
+# Измените размер тестовых данных до размера входных данных модели ResNet-50
+x_test = tf.image.resize(x_test, (224, 224)).numpy()
 
 # Выполните атаку
 attack = FastGradientMethod(estimator=classifier, eps=0.2)
